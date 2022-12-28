@@ -1,0 +1,3 @@
+[submodule "backend/userver"]
+	path = backend/external/userver
+	url = git@github.com:userver-framework/userver.git
