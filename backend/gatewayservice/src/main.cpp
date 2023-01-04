@@ -1,3 +1,4 @@
+#include "userver/server/handlers/ping.hpp"
 #include <userver/utest/using_namespace_userver.hpp>
  
 #include <userver/components/minimal_server_component_list.hpp>
@@ -7,18 +8,18 @@
 namespace abc {
  
 class Hello final : public server::handlers::HttpHandlerBase {
- public:
-  // `kName` is used as the component name in static config
-  static constexpr std::string_view kName = "handler-hello-sample";
+public:
+    // `kName` is used as the component name in static config
+    static constexpr std::string_view kName = "handler-hello-sample";
  
-  // Component is valid after construction and is able to accept requests
-  using HttpHandlerBase::HttpHandlerBase;
- 
-  std::string HandleRequestThrow(
-      const server::http::HttpRequest&,
-      server::request::RequestContext&) const override {
-    return "Hello world!\n";
-  }
+    // Component is valid after construction and is able to accept requests
+    using HttpHandlerBase::HttpHandlerBase;
+
+    std::string HandleRequestThrow(
+            const server::http::HttpRequest&,
+            server::request::RequestContext&) const override {
+        return "Hello world!\n";
+    }
 };
  
 }  // namespace samples::hello
@@ -30,7 +31,8 @@ inline constexpr bool
     USERVER_NAMESPACE::components::kHasValidate<abc::Hello> = true;
  
 int main(int argc, char* argv[]) {
-  const auto component_list =
-      components::MinimalServerComponentList().Append<abc::Hello>();
-  return utils::DaemonMain(argc, argv, component_list);
+    const auto component_list = components::MinimalServerComponentList()
+        .Append<abc::Hello>()
+        .Append<userver::server::handlers::Ping>();
+    return utils::DaemonMain(argc, argv, component_list);
 }

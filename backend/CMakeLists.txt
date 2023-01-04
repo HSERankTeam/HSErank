@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(service_template CXX)
 
+set(CMAKE_CXX_STANDARD 20)
 
 ### userver
 set(USERVER_FEATURE_POSTGRESQL 0)
@@ -14,5 +15,19 @@ add_subdirectory(external/userver)
 # gateway
 add_executable(gateway ${CMAKE_CURRENT_SOURCE_DIR}/gatewayservice/src/main.cpp)
 target_link_libraries(gateway PUBLIC userver-core)
-# target_include_directories(gateway ${CMAKE_CURRENT_SOURCE_DIR}/external/userver)
+set_target_properties(gateway PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/gateway
+)
+file(
+    COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/gatewayservice/src/static_config.yaml
+    DESTINATION
+    ${CMAKE_CURRENT_SOURCE_DIR}/bin/gateway/
+)
+file(
+    COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/gatewayservice/src/dynamic_config.json
+    DESTINATION
+    ${CMAKE_CURRENT_SOURCE_DIR}/bin/gateway/
+)
 # gateway
