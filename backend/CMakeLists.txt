@@ -1,14 +1,12 @@
-cmake_minimum_required(VERSION 3.12)
+ cmake_minimum_required(VERSION 3.12)
 project(service_template CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+
+# set(CMAKE_CXX_STANDARD 20)
 
 ### userver
-set(USERVER_FEATURE_POSTGRESQL 0)
-
 include(external/userver/cmake/SetupEnvironment.cmake)
 include(GNUInstallDirs)
-
 add_subdirectory(external/userver)
 ### ~userver
 
