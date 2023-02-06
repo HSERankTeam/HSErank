@@ -1,0 +1,2 @@
+/usr/bin/ar qc libuserver-core-internal.a "CMakeFiles/userver-core-internal.dir/internal/src/net/net_listener.cpp.o"
+/usr/bin/ranlib libuserver-core-internal.a

@@ -1,9 +1,6 @@
  cmake_minimum_required(VERSION 3.12)
 project(service_template CXX)
 
-
-# set(CMAKE_CXX_STANDARD 20)
-
 ### userver
 include(external/userver/cmake/SetupEnvironment.cmake)
 include(GNUInstallDirs)
@@ -29,3 +26,24 @@ file(
     ${CMAKE_CURRENT_SOURCE_DIR}/bin/gateway/
 )
 # gateway
+
+# dblp
+find_package(ZLIB REQUIRED)
+add_executable(dblp ${CMAKE_CURRENT_SOURCE_DIR}/dblpservice/src/main.cpp)
+target_link_libraries(dblp PUBLIC userver-core ZLIB::ZLIB)
+set_target_properties(dblp PROPERTIES 
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/dblp
+)
+file(
+    COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/dblpservice/src/static_config.yaml
+    DESTINATION
+    ${CMAKE_CURRENT_SOURCE_DIR}/bin/dblp/
+)
+file(
+    COPY
+    ${CMAKE_CURRENT_SOURCE_DIR}/dblpservice/src/dynamic_config.json
+    DESTINATION
+    ${CMAKE_CURRENT_SOURCE_DIR}/bin/dblp/
+)
+# dblp

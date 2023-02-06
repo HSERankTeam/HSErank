@@ -1,0 +1,2 @@
+/usr/bin/ar qc libuserver-ubench.a "CMakeFiles/userver-ubench.dir/src/core_benchmark.cpp.o"
+/usr/bin/ranlib libuserver-ubench.a
