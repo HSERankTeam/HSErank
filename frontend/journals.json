@@ -1,0 +1,48 @@
+[
+    {
+        "category":"AI",
+        "data": [
+            {"theme":"Artificial intelligence"},
+            {"theme":"Computer vision"},
+            {"theme":"Machine learning"},
+            {"theme":"Natural language processing"},
+            {"theme":"The Web & information retrieval"}
+        ]
+    },
+    {
+        "category":"Systems",
+        "data": [
+            {"theme":"Computer architecture"},
+            {"theme":"Computer networks"},
+            {"theme":"Computer security"},
+            {"theme":"Databases"},
+            {"theme":"Design automation"},
+            {"theme":"Embedded & real-time systems"},
+            {"theme":"High-performance computing"},
+            {"theme":"Mobile computing"},
+            {"theme":"Measurement & perf. analysis"},  	
+            {"theme":"Operating systems"},
+            {"theme":"Programming languages"},	
+            {"theme":"Software engineering"}
+        ]
+    },
+    {
+        "category": "Theory",
+        "data": [
+            {"theme":"Algorithms & complexity"},
+            {"theme":"Cryptography"},
+            {"theme":"Logic & verification"}
+        ]
+    },
+    {
+        "category": "Interdisciplinary Areas",
+        "data": [
+            {"theme":"Comp. bio & bioinformatics"},
+            {"theme":"Computer graphics"},
+            {"theme":"Economics & computation"},
+            {"theme":"Human-computer interaction"},
+            {"theme":"Robotics"},
+            {"theme":"Visualization"}
+        ]
+    }
+]

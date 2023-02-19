@@ -1,0 +1,172 @@
+/* reset css */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* main styles */
+
+.app {
+    background-color: white;
+}
+
+.main_hbox {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 3fr;
+    height: 2000px;
+}
+
+.select_block {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.select_block_text {
+    margin-left: 5%;
+    margin-top: 19%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.category_header {
+    margin-bottom: 7px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+}
+
+.journal_category_block {
+    margin-bottom: 5%;
+}
+
+.journal_checkbox {
+    margin-top: 4px;
+    accent-color: black;
+}
+
+.top_block {
+    background-color: #171717;
+    margin-top: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 56px;
+    border: 0;
+    /* opacity: 96%; */
+    position: fixed;
+    z-index: 1;
+}
+
+.content_block {
+    position: relative;
+    width: 100%;
+    background-color: white;
+}
+
+.top_info_pannel {
+    position: absolute;
+    background-color: black;
+    margin-left: 0;
+    margin-top: 0px;
+    height: 350px;
+    width: 100%;
+}
+
+.rating_block {
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    height: auto;
+    width: 100%;
+    min-height: 400px;
+    top: 450px;
+}
+
+.university_record {
+    display: grid;
+    width: auto;
+    /* margin-left: 5%; */
+    /* margin-right: 5%; */
+    height: 45px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    font-size: 17px;
+    text-align: center;
+}
+
+.university_record:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.main_text {
+    position: absolute;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 130px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+}
+
+.info_block {
+    background-color: white;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 1000px;
+}
+
+.bottom_info_block {
+    background-color: black;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 300px;
+}
+
+.bottom_block {
+    background-color: rgb(182, 182, 182);
+    width: 100%;
+    height: 200px;
+}
