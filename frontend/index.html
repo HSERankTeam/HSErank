@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Our name)))</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <script>
+        window.journals_promise = fetch("journals.json")
+    </script>
+
+    <script src="main.js">
+    </script>
+
+</head>
+<body>
+
+    <div id="app" class="app">
+        <div class="top_block" style="text-align: center; color: white;">
+            картинка
+        </div>
+
+
+        <div class="main_hbox">
+            <div class="select_block"> <!-- SELECT PANEL -->
+                <div class="select_block_text">
+                    <div v-for="journal in journals" class="journal_category_block">
+                        <p class="category_header"> {{ journal.category }} </p>
+                        <div v-for="theme in journal.data" class="checkbox_container">
+                            <input type="checkbox" class="journal_checkbox" id="journal_checkbox"> {{ theme.theme }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_block"> <!-- CONTENT_PANEL-->
+                <div class="top_info_pannel"> <!-- INFO -->
+                    <div class="main_text">
+                        Сервис для построения рейтингов вузов России по публикациям в Computer Science и смежных областях.
+                        Используются данные из dblp *link*?
+                        Обновление происходит раз в день
+                    </div>
+                </div>
+                <div class="rating_block"> <!-- RATING BLOCK-->
+                    <div class="university_record" v-for="(university, index) in universities">
+                        <div style="margin-top: 0%; margin-bottom: 0%;">
+                            {{ index + 1}}
+                        </div>
+                        <div>
+                            {{ university.name }}
+                        </div>
+                        <div>
+                            {{ university.city }}
+                        </div>
+                        <div>
+                            {{ university.metric1 }}
+                        </div>
+                        <div>
+                            {{ university.metric2 }}
+                        </div>
+                        <div>
+                            {{ university.metric3 }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="info_block"></div><div>
+        <div class="bottom_info_block"></div>
+        <div class="bottom_block"></div>
+    </div>
+
+</body>
+</html>
