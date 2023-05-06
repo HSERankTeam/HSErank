@@ -26,11 +26,21 @@
         <div class="main_hbox">
             <div class="select_block"> <!-- SELECT PANEL -->
                 <div class="select_block_text">
+                    <div class=" time_txt"> Публикации от 
+                        <select>
+                            <option v-for="year in  years"> {{year}} </option>
+                        </select> 
+                            до
+                        <select>
+                            <option v-for="year in  rev_years"> {{year}} </option>
+                        </select> 
+
+                    </div> 
                     <div v-for="journal in journals" class="journal_category_block">
                         <p class="category_header"> {{ journal.category }} </p>
-                        <div v-for="theme in journal.data" class="checkbox_container">
-                            <input type="checkbox" class="journal_checkbox" id="journal_checkbox"> {{ theme.theme }}
-                        </div>
+                        <div v-for="item in journal.data" class="checkbox_container">
+                            <label><input type="checkbox" class="journal_checkbox"/> {{ item.theme }} </label>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -43,7 +53,7 @@
                     </div>
                 </div>
                 <div class="rating_block"> <!-- RATING BLOCK-->
-                    <div class="university_record" v-for="(university, index) in universities">
+                    <div class="university_record" v-for ="(university, index) in universities">
                         <div style="margin-top: 0%; margin-bottom: 0%;">
                             {{ index + 1}}
                         </div>
