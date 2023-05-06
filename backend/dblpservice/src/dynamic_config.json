@@ -1,4 +1,8 @@
 {
+    "BAGGAGE_SETTINGS": {
+        "allowed_keys": []
+    },
+    "USERVER_BAGGAGE_ENABLED": false,
     "USERVER_CACHES": {},
     "USERVER_CANCEL_HANDLE_REQUEST_BY_DEADLINE": false,
     "USERVER_CHECK_AUTH_IN_HANDLERS": false,
@@ -14,10 +18,10 @@
     "HTTP_CLIENT_CONNECT_THROTTLE": {
       "http-limit": 6000,
       "http-per-second": 1500,
-      "https-limit": 100,
-      "https-per-second": 25,
+      "https-limit": 1000,
+      "https-per-second": 500,
       "per-host-limit": 3000,
-      "per-host-per-second": 500
+      "per-host-per-second": 5000
     },
     "HTTP_CLIENT_ENFORCE_TASK_DEADLINE": {
       "cancel-request": false,
@@ -32,6 +36,51 @@
             "time_limit_us": 3000
           }
         }
+      }
+    },
+    "POSTGRES_CONNECTION_PIPELINE_MODE_ENABLED": false,
+    "POSTGRES_CONNECTION_POOL_SETTINGS": {
+      "key-value-database": {
+        "max_pool_size": 15,
+        "max_queue_size": 200,
+        "min_pool_size": 8
+      }
+    },
+    "POSTGRES_CONNECTION_SETTINGS": {
+      "key-value-database": {
+        "recent-errors-threshold": 100000
+      }
+    },
+    "POSTGRES_CONNLIMIT_MODE_AUTO_ENABLED": false,
+    "POSTGRES_DEFAULT_COMMAND_CONTROL": {
+      "network_timeout_ms": 7500,
+      "statement_timeout_ms": 5000
+    },
+    "POSTGRES_HANDLERS_COMMAND_CONTROL": {
+      "/dblp": {
+        "SELECT": {
+          "network_timeout_ms": 5000,
+          "statement_timeout_ms": 2500
+        },
+        "INSERT": {
+            "network_timeout_ms": 15000,
+            "statement_timeout_ms": 25000
+        }
+      }
+    },
+    "POSTGRES_QUERIES_COMMAND_CONTROL": {
+      "sample_select_value": {
+        "network_timeout_ms": 700,
+        "statement_timeout_ms": 400
+      },
+      "sample_transaction_insert_key_value": {
+        "network_timeout_ms": 5000,
+        "statement_timeout_ms": 1500
+      }
+    },
+    "POSTGRES_STATEMENT_METRICS_SETTINGS": {
+      "key-value-database": {
+        "max_statement_metrics": 5
       }
     }
   }
