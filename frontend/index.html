@@ -8,7 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     <script>
-        window.journals_promise = fetch("journals.json")
+        window.journals_promise = fetch("journals.json");
     </script>
 
     <script src="main.js">
@@ -26,22 +26,25 @@
         <div class="main_hbox">
             <div class="select_block"> <!-- SELECT PANEL -->
                 <div class="select_block_text">
+                    <form >
                     <div class=" time_txt"> Публикации от 
-                        <select>
+                        <select name="start_year">
                             <option v-for="year in  years"> {{year}} </option>
                         </select> 
                             до
-                        <select>
+                        <select name="end_year">
                             <option v-for="year in  rev_years"> {{year}} </option>
                         </select> 
+                        <button type="submit" class="search_button"> искать </button>
 
                     </div> 
                     <div v-for="journal in journals" class="journal_category_block">
                         <p class="category_header"> {{ journal.category }} </p>
                         <div v-for="item in journal.data" class="checkbox_container">
-                            <label><input type="checkbox" class="journal_checkbox"/> {{ item.theme }} </label>
+                            <label><input type="checkbox" :name="item.theme" class="journal_checkbox"/> {{ item.theme }} </label>
                         </div> 
                     </div>
+                    </form>
                 </div>
             </div>
             <div class="content_block"> <!-- CONTENT_PANEL-->

@@ -82,6 +82,9 @@ table {
     margin-top: 4px;
     accent-color: black;
 }
+.journal_checkbox:checked {
+    visibility: hidden;
+}
 
 .top_block {
     background-color: #171717;
