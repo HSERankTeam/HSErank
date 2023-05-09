@@ -1,4 +1,5 @@
 #include <chrono>
+#include <cstddef>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
@@ -10,6 +11,7 @@
 #include "userver/engine/sleep.hpp"
 #include "userver/logging/log.hpp"
 #include "userver/storages/postgres/cluster_types.hpp"
+#include "userver/storages/postgres/exceptions.hpp"
 #include "userver/storages/postgres/postgres_fwd.hpp"
 #include "userver/storages/postgres/query.hpp"
 #include "userver/testsuite/testsuite_support.hpp"
@@ -94,7 +96,7 @@ public:
                     throw std::runtime_error("");
                 }
                 // LOG_DEBUG() << "LENGTH " << length; 
-                dblpXmlArticleParser parser({"www"});
+                dblpXmlArticleParser parser({"inproceedings"});
                 for (size_t i = 0; i < length; i += downloadPartSize) {
                     LOG_ERROR() << double(i) / length * 100 << " PERCENTS ";
                     LOG_DEBUG() << "LOOP STARTED";
@@ -183,8 +185,12 @@ public:
     void sendArticlesToDb(const std::vector<articlePart>& data) const {
         if (data.empty()) return;
         std::string request;
+        size_t cnt = 0;
         request += "INSERT INTO articles VALUES ";
         for (const auto& article : data) {
+            if (article.author.size() > 10) {
+                continue;
+            }
             for (const auto& author : article.author) {
                 // TODO format string
                 request += "(";
@@ -198,7 +204,11 @@ public:
                 request += article.year;
                 request += ')';
                 request += ',';
+                ++cnt;
             }
+        }
+        if (cnt == 0) {
+            return;
         }
         request.pop_back();
         request += R"~(
@@ -206,7 +216,11 @@ public:
             )~";
         LOG_DEBUG() << "ABOBAA" << request;
         using storages::postgres::ClusterHostType;
-        auto result = pgCluster_->Execute(ClusterHostType::kMaster, request);
+        try {
+            auto result = pgCluster_->Execute(ClusterHostType::kMaster, request);
+        } catch(storages::postgres::Error& e) {
+            LOG_ERROR() << e.what() << ' ' << data.size() << request;
+        }
     }
 
     static void append(std::string& request, const std::string& data) {
@@ -256,7 +270,7 @@ public:
     }
 
     constexpr static size_t downloadPartSize = 100'000;
-    constexpr static size_t outBufferSize = 100'000;
+    constexpr static size_t outBufferSize = 2'000;
 
 protected:
     clients::http::Client& httpClient_;
