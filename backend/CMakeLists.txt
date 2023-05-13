@@ -11,7 +11,7 @@ add_subdirectory(external/userver)
 
 # gateway
 add_executable(gateway ${CMAKE_CURRENT_SOURCE_DIR}/gatewayservice/src/main.cpp)
-target_link_libraries(gateway PUBLIC userver-core)
+target_link_libraries(gateway PUBLIC userver-core userver-postgresql)
 set_target_properties(gateway PROPERTIES 
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/gateway
 )
