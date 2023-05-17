@@ -285,10 +285,6 @@ public:
         pgCluster_(context.FindComponent<components::Postgres>("database").GetCluster()),
         updatedbTask()
     {
-        updatedbTask.Start("aboba", utils::PeriodicTask::Settings(updateInterval), [this](){
-            // LOG_ERROR() << "TASK RUN";
-            task();
-        });
         using storages::postgres::ClusterHostType;
 
         constexpr auto createUniversitiesTableQ = R"~(
@@ -375,6 +371,11 @@ public:
             ON CONFLICT DO NOTHING
         )~";
         pgCluster_->Execute(ClusterHostType::kMaster, insertDefaultVarsQ);
+
+        updatedbTask.Start("aboba", utils::PeriodicTask::Settings(updateInterval), [this](){
+            // LOG_ERROR() << "TASK RUN";
+            task();
+        });
     }
 
     constexpr static size_t downloadPartSize = 100'000;
