@@ -9,7 +9,7 @@ var app
     let reversed_years = [...years];
     reversed_years.reverse();
 
-    let journals_json = await (await window.journals_promise).json()
+    let journals_json = await (await window.journals_promise).json();
 
     app = new Vue({
         el: '#app',
@@ -26,6 +26,29 @@ var app
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0}]
         },
+        methods : {
+            submit() {
+                let checkboxes = document.getElementsByClassName('journal_checkbox');
+                let st_year = document.getElementById("start_year").value;
+                let finale_year = document.getElementById("end_year").value;
+                console.log(st_year);
+                console.log(checkboxes);
+                let obj1= {
+                    themes: [],
+                    year_1: st_year,
+                    year_2: finale_year
+                };
+                for (let i = 0; i < checkboxes.length; i++) {
+                    if(checkboxes[i].checked) {
+                        obj1.themes.push(checkboxes[i].getAttribute("name"));
+                    }
+                }
+                console.log(obj1);
+                fetch("" + new URLSearchParams(obj1)).then((response)=> {
+                    
+                });
+            }
+        }
     })
 
 })()

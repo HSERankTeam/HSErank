@@ -26,22 +26,25 @@
         <div class="main_hbox">
             <div class="select_block"> <!-- SELECT PANEL -->
                 <div class="select_block_text">
-                    <form >
+                    <form @submit.prevent="submit">
                     <div class=" time_txt"> Публикации от 
-                        <select name="start_year">
-                            <option v-for="year in  years"> {{year}} </option>
-                        </select> 
+                        <select name="start_year" id="start_year">
+                            <option v-for="year http://localhost:8080/themes=Artificial+intelligence%2CThe+Web+%26+information+retrieval&year_1=1970&year_2=2014in  years"> {{year}} </option>
+                        </select>    
                             до
-                        <select name="end_year">
+                        <select name="end_year" id="end_year">
                             <option v-for="year in  rev_years"> {{year}} </option>
                         </select> 
-                        <    type="submit" class="search_button"> искать </button>
+                        <button type="submit" class="search_button"> искать </button>
 
                     </div> 
                     <div v-for="journal in journals" class="journal_category_block">
                         <p class="category_header"> {{ journal.category }} </p>
                         <div v-for="item in journal.data" class="checkbox_container">
                             <label><input type="checkbox" :name="item.theme" class="journal_checkbox"/> {{ item.theme }} </label>
+                            <div v-for="thing in journal.data">
+                                
+                            </div>
                         </div> 
                     </div>
                     </form>
@@ -51,9 +54,8 @@
                 <div class="top_info_pannel"> <!-- INFO -->
                     <div class="main_text">
                         Сервис для построения рейтингов вузов России по публикациям в Computer Science и смежных областях.
-                        Используются данные из
-                        <a href="https://dblp.org/" target="_blank"> dblp</a> 
-                        Обновление происходит раз в день
+                        Обновление происходит раз в день. Используются данные из
+                        <a href="https://dblp.org/" target="_blank  ">dblp</a>
                     </div>
                 </div>
                 <div class="rating_block"> <!-- RATING BLOCK-->
