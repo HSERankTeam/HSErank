@@ -2,7 +2,13 @@
     {
         "category":"AI",
         "data": [
-            {"theme":"Artificial intelligence"},
+            {"theme":"Artificial intelligence",
+        "subthemes": [
+            {"name":"Abobus"},
+            {"name":"Amogus"},
+            {"name":"Aboba"}
+        ]
+            },
             {"theme":"Computer vision"},
             {"theme":"Machine learning"},
             {"theme":"Natural language processing"},

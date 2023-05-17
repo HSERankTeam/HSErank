@@ -27,6 +27,11 @@ var app
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0}]
         },
         methods : {
+            click(e) {
+                console.log(e.target.nextElementSibling);
+                const L = e.target.nextElementSibling;
+                L.classList.toggle("hidden");
+            },
             submit() {
                 let checkboxes = document.getElementsByClassName('journal_checkbox');
                 let st_year = document.getElementById("start_year").value;

@@ -207,5 +207,15 @@ table {
     padding-right: 19px;
   }
   
-  
+  .subtheme_checkbox {
+    margin-left: 10px;
+  }
+
+  .opened {
+    display:block;
+  }
+
+  .hidden {
+    display:none;
+  }
   
