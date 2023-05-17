@@ -1,5 +1,7 @@
+#include "userver/clients/dns/component.hpp"
 #include "userver/formats/json/value_builder.hpp"
 #include "userver/storages/postgres/postgres_fwd.hpp"
+#include "userver/testsuite/testsuite_support.hpp"
 #include <userver/server/handlers/ping.hpp>
 #include <userver/utest/using_namespace_userver.hpp>
 
@@ -51,6 +53,7 @@ public:
     }
     storages::postgres::ClusterPtr pgCluster_;
 };
+
  
 }  // namespace samples::hello
  
@@ -62,7 +65,9 @@ inline constexpr bool
  
 int main(int argc, char* argv[]) {
     const auto component_list = components::MinimalServerComponentList()
+        .Append<clients::dns::Component>()
         .Append<components::Postgres>("database")
+        .Append<components::TestsuiteSupport>()
         .Append<api::getRank>()
         .Append<userver::server::handlers::Ping>();
     return utils::DaemonMain(argc, argv, component_list);

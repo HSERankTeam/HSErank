@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <bits/chrono.h>
 #include <chrono>
 #include <cstddef>
 #include <cstdint>
@@ -63,8 +64,21 @@ public:
         }
 
         std::string_view availableDataHash = response->body_view();
-            // TODO check if need update
+        
         bool newDataAvailable = true;
+
+        try {
+            constexpr auto hashQ = R"~(
+                SELECT param_value FROM var WHERE param_name = 'last_update_hash'
+            )~";
+            auto res = pgCluster_->Execute(storages::postgres::ClusterHostType::kMaster, hashQ).AsSingleRow<std::string>();
+            LOG_INFO() << res;
+            if (res == availableDataHash) {
+                newDataAvailable = false;
+            }
+        } catch(storages::postgres::Error& e) {
+            LOG_ERROR() << "hash check fail " << e.what();
+        }
 
         if (newDataAvailable) {
             // get length of content
@@ -91,10 +105,11 @@ public:
             // LOG_DEBUG() << "LENGTH " << length; 
             dblpXmlArticleParser parser({"article"});
             for (size_t i = 0; i < length; i += downloadPartSize) {
-                LOG_ERROR() << double(i) / length * 100 << " PERCENTS ";
+                // LOG_ERROR() << double(i) / length * 100 << " PERCENTS ";
                 auto from = std::to_string(i);
                 auto to = std::to_string(std::min(i + downloadPartSize - 1, length - 1));
                 const auto response = httpClient_.CreateRequest()
+                // TODO move to config
                 -> get("http://185.188.183.91/dblp.xml.gz")
                 -> timeout(std::chrono::seconds(15))
                 -> retry(10)
@@ -165,7 +180,14 @@ public:
             if (inflateEnd(&stream) != Z_OK) {
                 throw std::runtime_error("failed inflateEnd");
             }
-            return;
+            {
+                constexpr auto updateHashQ = R"~(
+                    UPDATE var SET
+                        param_value = {}
+                    WHERE param_name = 'last_update_hash'
+                )~";
+                pgCluster_->Execute(storages::postgres::ClusterHostType::kMaster, updateHashQ, availableDataHash);
+            }
         }
     }
 
@@ -256,8 +278,6 @@ public:
         request += '\'';
     }
 
-
-
     UpdateDB(const components::ComponentConfig& config,
             const components::ComponentContext& context):
         server::handlers::HttpHandlerBase(config, context),
@@ -265,8 +285,8 @@ public:
         pgCluster_(context.FindComponent<components::Postgres>("database").GetCluster()),
         updatedbTask()
     {
-        updatedbTask.Start("aboba", utils::PeriodicTask::Settings(std::chrono::seconds{10}), [this](){
-            LOG_ERROR() << "TASK RUN";
+        updatedbTask.Start("aboba", utils::PeriodicTask::Settings(updateInterval), [this](){
+            // LOG_ERROR() << "TASK RUN";
             task();
         });
         using storages::postgres::ClusterHostType;
@@ -279,6 +299,43 @@ public:
             )
         )~";
         pgCluster_->Execute(ClusterHostType::kMaster, createUniversitiesTableQ);
+
+        constexpr auto addUniversityesQ = R"~(
+            INSERT INTO universities (name) VALUES
+                ('Lomonosov Moscow State University'),
+                ('Moscow Institute of Physics & Technology'),
+                ('National Research Nuclear University MEPhI (Moscow Engineering Physics Institute'),
+                ('HSE University (National Research University Higher School of Economics'),
+                ('Novosibirsk State University'),
+                ('Tomsk State University'),
+                ('Sechenov First Moscow State Medical University'),
+                ('Saint Petersburg State University'),
+                ('Peter the Great St. Petersburg Polytechnic University'),
+                ('ITMO University'),
+                ('Skolkovo Institute of Science & Technology'),
+                ('Kazan Federal University'),
+                ('Tomsk Polytechnic University'),
+                ('South Ural State University'),
+                ('Peoples Friendship University of Russia'),
+                ('Ural Federal University'),
+                ('National University of Science & Technology (MISIS)'),
+                ('Lobachevsky State University of Nizhni Novgorod'),
+                ('Saratov State University'),
+                ('Far Eastern Federal University'),
+                ('Siberian Federal University'),
+                ('Southern Federal University'),
+                ('Pirogov Russian National Research Medical University'),
+                ('Bauman Moscow State Technical University'),
+                ('Mendeleev University of Chemical Technology of Russia'),
+                ('MIREA - Russian Technological University'),
+                ('Belgorod State University'),
+                ('Novosibirsk State Technical University'),
+                ('Samara National Research University'),
+                ('Tomsk State Pedagogical University'),
+                ('Tomsk State University of Control Systems & Radioelectronics')
+            ON CONFLICT DO NOTHING
+            )~";
+        pgCluster_->Execute(ClusterHostType::kMaster, addUniversityesQ);
 
         constexpr auto createAuthorsTableQ = R"~(
             CREATE TABLE IF NOT EXISTS authors (
@@ -303,11 +360,26 @@ public:
         )~";
         pgCluster_->Execute(ClusterHostType::kMaster, createArticlesTableQ);
 
-        
+        constexpr auto createVarTableQ = R"~(
+            CREATE TABLE IF NOT EXISTS var (
+                param_name TEXT,
+                param_value TEXT NOT NULL,
+                PRIMARY KEY (param_name)
+            )
+        )~";
+        pgCluster_->Execute(ClusterHostType::kMaster, createVarTableQ);
+
+        constexpr auto insertDefaultVarsQ = R"~(
+            INSERT INTO var (param_name, param_value) VALUES
+                ('last_update_hash', 'empty')
+            ON CONFLICT DO NOTHING
+        )~";
+        pgCluster_->Execute(ClusterHostType::kMaster, insertDefaultVarsQ);
     }
 
     constexpr static size_t downloadPartSize = 100'000;
     constexpr static size_t outBufferSize = 5'000;
+    constexpr static std::chrono::hours updateInterval{24};
 
 protected:
     clients::http::Client& httpClient_;
