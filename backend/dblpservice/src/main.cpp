@@ -372,10 +372,15 @@ public:
         )~";
         pgCluster_->Execute(ClusterHostType::kMaster, insertDefaultVarsQ);
 
+        constexpr auto crateIndexQ = R"~(
+            CREATE INDEX IF NOT EXISTS journal_year ON articles (journal, year)
+        )~";
+
         updatedbTask.Start("aboba", utils::PeriodicTask::Settings(updateInterval), [this](){
             // LOG_ERROR() << "TASK RUN";
             task();
         });
+
     }
 
     constexpr static size_t downloadPartSize = 100'000;
