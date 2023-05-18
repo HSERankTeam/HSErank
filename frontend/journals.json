@@ -3,52 +3,190 @@
         "category":"AI",
         "data": [
             {"theme":"Artificial intelligence",
-        "subthemes": [
-            {"name":"Abobus"},
-            {"name":"Amogus"},
-            {"name":"Aboba"}
-        ]
+                "subthemes": [
+                    {"name":"AAAI"},
+                    {"name":"IJCAI"}
+                ]
             },
-            {"theme":"Computer vision"},
-            {"theme":"Machine learning"},
-            {"theme":"Natural language processing"},
-            {"theme":"The Web & information retrieval"}
+            {"theme":"Computer vision",
+                "subthemes": [
+                    {"name":"CVPR"},
+                    {"name":"ECCV"},
+                    {"name":"ICCV"}
+                ]
+            },
+            {"theme":"Machine learning",
+                "subthemes": [
+                    {"name":"ICLR"},
+                    {"name":"ICML"},
+                    {"name":"ICML"}
+                ]
+            },
+            {"theme":"Natural language processing",
+                "subthemes": [
+                    {"name":"ACL"},
+                    {"name":"EMNLP"},
+                    {"name":"NAACL"}
+                ]
+            },
+            {"theme":"The Web & information retrieval",
+                "subthemes": [
+                    {"name":"SIGIR"},
+                    {"name":"WWW"}
+                ]
+            }
         ]
     },
     {
         "category":"Systems",
         "data": [
-            {"theme":"Computer architecture"},
-            {"theme":"Computer networks"},
-            {"theme":"Computer security"},
-            {"theme":"Databases"},
-            {"theme":"Design automation"},
-            {"theme":"Embedded & real-time systems"},
-            {"theme":"High-performance computing"},
-            {"theme":"Mobile computing"},
-            {"theme":"Measurement & perf. analysis"},  	
-            {"theme":"Operating systems"},
-            {"theme":"Programming languages"},	
-            {"theme":"Software engineering"}
+            {"theme":"Computer architecture",
+                "subthemes": [
+                    {"name":"ASPLOS"},
+                    {"name":"ISCA"},
+                    {"name":"MICRO"}
+                ]
+            },
+            {"theme":"Computer networks",
+                "subthemes": [
+                    {"name":"SIGCOMM"},
+                    {"name":"NSDI"}
+                ]
+            },
+            {"theme":"Computer security",
+            "subthemes": [
+                {"name":"CCS"},
+                {"name":"IEEE S&P (\"Oakland\")"},
+                {"name":"USENIX Security"}
+            ]
+            },
+            {"theme":"Databases",
+                "subthemes": [
+                    {"name":"SIGMOD"},
+                    {"name":"VLDB"}
+                ]
+            },
+            {"theme":"Design automation",
+                "subthemes": [
+                    {"name":"DAC"},
+                    {"name":"ICCAD"}
+                ]
+            },
+            {"theme":"Embedded & real-time systems",
+                "subthemes": [
+                    {"name":"EMSOFT"},
+                    {"name":"RTAS"},
+                    {"name":"RTSS"}
+                ]
+            },
+            {"theme":"High-performance computing",
+                "subthemes": [
+                    {"name":"HPDC"},
+                    {"name":"ICS"},
+                    {"name":"SC"}
+                ]
+            },
+            {"theme":"Mobile computing",
+                "subthemes": [
+                    {"name":"MobiCom"},
+                    {"name":"MobiSys"},
+                    {"name":"SenSys"}
+                ]
+            },
+            {"theme":"Measurement & perf. analysis",
+                "subthemes": [
+                    {"name":"IMC"},
+                    {"name":"SIGMETRICS"}
+                ]
+            },  	
+            {"theme":"Operating systems",
+                "subthemes": [
+                    {"name":"OSDI"},
+                    {"name":"SOSP"}
+                ]
+            },
+            {"theme":"Programming languages",
+                "subthemes": [
+                    {"name":"PLDI"},
+                    {"name":"POPL"}
+                ]
+            },	
+            {"theme":"Software engineering",
+                "subthemes": [
+                    {"name":"FSE"},
+                    {"name":"ICSE"}
+                ]
+            }
         ]
     },
     {
         "category": "Theory",
         "data": [
-            {"theme":"Algorithms & complexity"},
-            {"theme":"Cryptography"},
-            {"theme":"Logic & verification"}
+            {"theme":"Algorithms & complexity",
+                "subthemes": [
+                    {"name":"FOCS"},
+                    {"name":"SODA"},
+                    {"name":"STOC"}
+                ]
+            },
+            {"theme":"Cryptography",
+                "subthemes": [
+                    {"name":"CRYPTO"},
+                    {"name":"EuroCrypt"}
+                ]
+            },
+            {"theme":"Logic & verification",
+                "subthemes": [
+                    {"name":"CAV"},
+                    {"name":"LICS"}
+                ]
+            }
         ]
     },
     {
         "category": "Interdisciplinary Areas",
         "data": [
-            {"theme":"Comp. bio & bioinformatics"},
-            {"theme":"Computer graphics"},
-            {"theme":"Economics & computation"},
-            {"theme":"Human-computer interaction"},
-            {"theme":"Robotics"},
-            {"theme":"Visualization"}
+            {"theme":"Comp. bio & bioinformatics",
+                "subthemes": [
+                    {"name":"ISMB"},
+                    {"name":"RECOMB"}
+                ]
+            },
+            {"theme":"Computer graphics",
+                "subthemes": [
+                    {"name":"SIGGRAPH"},
+                    {"name":"SIGGRAPH Asia"}
+                ]
+            },
+            {"theme":"Computer science education ",
+                "subthemes": [
+                    {"name":"acm sigcse"}
+                ]
+            },
+            {"theme":"Economics & computation",
+                "subthemes": [
+                    {"name":"acm sigecom"}
+                ]
+            },
+            {"theme":"Human-computer interaction",
+                "subthemes": [
+                    {"name":"CHI"},
+                    {"name":"UIST"}
+                ]
+            },
+            {"theme":"Robotics",
+                "subthemes": [
+                    {"name":"ICRA"},
+                    {"name":"IROS"},
+                    {"name":"RSS"}
+                ]
+            },
+            {"theme":"Visualization",
+                "subthemes": [
+                    {"name":"VIS"},
+                    {"name":"VR"}
+                ]
+            }
         ]
     }
 ]

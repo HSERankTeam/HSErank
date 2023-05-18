@@ -29,28 +29,51 @@ var app
         methods : {
             click(e) {
                 console.log(e.target.nextElementSibling);
+                const P = e.target.previousElementSibling;
                 const L = e.target.nextElementSibling;
+                P.classList.toggle("opac");
                 L.classList.toggle("hidden");
             },
             submit() {
-                let checkboxes = document.getElementsByClassName('journal_checkbox');
+                let themeCheckboxes = document.getElementsByClassName('journal_checkbox');
+                console.log(themeCheckboxes)
+                let confsCheckboces = document.getElementsByClassName('journal_checkbox_sub');
                 let st_year = document.getElementById("start_year").value;
                 let finale_year = document.getElementById("end_year").value;
-                console.log(st_year);
-                console.log(checkboxes);
                 let obj1= {
                     themes: [],
+                    confs: [],
                     year_1: st_year,
                     year_2: finale_year
                 };
-                for (let i = 0; i < checkboxes.length; i++) {
-                    if(checkboxes[i].checked) {
-                        obj1.themes.push(checkboxes[i].getAttribute("name"));
+
+                for (let i = 0; i < themeCheckboxes.length; i++) {
+                    if (themeCheckboxes[i].checked && window.getComputedStyle(themeCheckboxes[i]).visibility === "visible") {
+                        obj1.themes.push(themeCheckboxes[i].getAttribute("name"))
                     }
                 }
-                console.log(obj1);
-                fetch("" + new URLSearchParams(obj1)).then((response)=> {
-                    
+                for (let i = 0; i < confsCheckboces.length; i++) {
+                    if(confsCheckboces[i].checked && confsCheckboces[i].checkVisibility()) {
+                        obj1.confs.push(confsCheckboces[i].getAttribute("name"));
+                    }
+                }
+                console.log(obj1)
+
+                // for (let i = 0; i < checkboxes.length; i++) {
+                //     if(checkboxes[i].checked) {
+                //         obj1.themes.push(checkboxes[i].getAttribute("name"));
+                //     }
+                // }
+                // console.log(obj1);
+                fetch("http://127.0.0.1:8081/get_rank",
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(obj1)
+                }).then((response)=> {
+                    console.log(response)
                 });
             }
         }

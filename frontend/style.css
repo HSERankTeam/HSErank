@@ -83,7 +83,12 @@ table {
     accent-color: black;
 }
 .journal_checkbox:checked {
-    visibility: hidden;
+    /* visibility: hidden; */
+}
+
+.journal_checkbox_sub {
+    margin-top: 4px;
+    accent-color: black;
 }
 
 .top_block {
@@ -219,3 +224,6 @@ table {
     display:none;
   }
   
+  .opac {
+    visibility: hidden;
+  }
