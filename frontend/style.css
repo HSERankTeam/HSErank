@@ -110,7 +110,6 @@ table {
 }
 
 .top_info_pannel {
-    position: absolute;
     background-color: black;
     margin-left: 0;
     margin-top: 0px;
@@ -119,26 +118,24 @@ table {
 }
 
 .rating_block {
-    position: absolute;
     background-color: rgb(255, 255, 255);
     height: auto;
     width: 100%;
     min-height: 400px;
-    top: 450px;
 }
 
 .university_record {
-    display: grid;
-    width: auto;
+    width: 100%;
     /* margin-left: 5%; */
     /* margin-right: 5%; */
-    height: 45px;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
     font-family: 'Roboto', sans-serif;
-    align-items: center;
     font-size: 17px;
     text-align: center;
+    padding: 10px;
 }
 
 .university_record:hover {
@@ -206,11 +203,11 @@ table {
     color: red;
   }
   
-  a[href^="http"] {
-    background: url("external-link-52.png") no-repeat 100% 0;
-    background-size: 16px 16px;
-    padding-right: 19px;
-  }
+    a[href^="http"] {
+      background: url("external-link-52.png") no-repeat 100% 0;
+      background-size: 16px 16px;
+      padding-right: 19px;
+    }
   
   .subtheme_checkbox {
     margin-left: 10px;
@@ -226,4 +223,16 @@ table {
   
   .opac {
     visibility: hidden;
+  }
+
+  .man_style {
+    margin-left: 40%;
+    padding: 10px;
+  }
+  
+  .metrics_style {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width: 100%;
   }

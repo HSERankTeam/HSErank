@@ -17,21 +17,26 @@ var app
             years: years,
             rev_years: reversed_years,
             journals: journals_json,
-            universities: [{"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
+            universities: 
+            [
+            {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0,
+        mans:[  {name:"Гринкруг  Ефим Михайлович"}, {name:"Валерий Игнатьев"}]},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
             {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0},
-            {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0}]
-        },
+            {"name":"Высшая школа экономики", "city":"Samara", "metric1":12.6, "metric2": 41.7, "metric3": 3.0}
+            ]
+           },
         methods : {
             click(e) {
                 console.log(e.target.nextElementSibling);
-                const P = e.target.previousElementSibling;
-                const L = e.target.nextElementSibling;
-                P.classList.toggle("opac");
+                const P = e.currentTarget.previousElementSibling;
+                console.log(e.currentTarget);
+                const L = e.currentTarget.nextElementSibling;
+                P?.classList?.toggle("opac");
                 L.classList.toggle("hidden");
             },
             submit() {
