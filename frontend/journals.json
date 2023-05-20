@@ -160,12 +160,12 @@
             },
             {"theme":"Computer science education ",
                 "subthemes": [
-                    {"name":"acm sigcse"}
+                    {"name":"ACM SIGCSE"}
                 ]
             },
             {"theme":"Economics & computation",
                 "subthemes": [
-                    {"name":"acm sigecom"}
+                    {"name":"ACM SIGECOM"}
                 ]
             },
             {"theme":"Human-computer interaction",

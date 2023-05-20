@@ -70,15 +70,18 @@ var app
                 //     }
                 // }
                 // console.log(obj1);
-                fetch("http://127.0.0.1:8081/get_rank",
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(obj1)
-                }).then((response)=> {
-                    console.log(response)
+                fetch("/api/get_rank",
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(obj1)
+                    }
+                )
+                .then((response)=> {
+                    console.log(response);
+                    data.universities = JSON.parse(response.body);
                 });
             }
         }
