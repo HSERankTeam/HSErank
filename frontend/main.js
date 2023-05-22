@@ -62,15 +62,13 @@ var app
                         obj1.confs.push(confsCheckboces[i].getAttribute("name"));
                     }
                 }
+
+                obj1.year_1 = parseInt(obj1.year_1)
+                obj1.year_2 = parseInt(obj1.year_2)
+
                 console.log(obj1)
 
-                // for (let i = 0; i < checkboxes.length; i++) {
-                //     if(checkboxes[i].checked) {
-                //         obj1.themes.push(checkboxes[i].getAttribute("name"));
-                //     }
-                // }
-                // console.log(obj1);
-                fetch("/api/get_rank",
+                fetch("/get_rank",
                     {
                         method: 'POST',
                         headers: {
@@ -79,10 +77,11 @@ var app
                         body: JSON.stringify(obj1)
                     }
                 )
-                .then((response)=> {
-                    console.log(response);
-                    data.universities = JSON.parse(response.body);
-                });
+                .then((response) => response.json())
+                .then((json) => {
+                    console.log(json)
+                    this.universities = json
+                })
             }
         }
     })
